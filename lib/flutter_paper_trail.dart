@@ -6,16 +6,17 @@ class FlutterPaperTrail {
   static const MethodChannel _channel =
       const MethodChannel('flutter_paper_trail');
 
-  static Future<String> initLogger(
-      {required String hostName,
-      required int port,
-      required String programName,
-      required String machineName}) async {
+  static Future<String> initLogger({
+    required String hostName,
+    int? port,
+    required String programName,
+    required String machineName,
+  }) async {
     return await _channel.invokeMethod('initLogger', {
       "hostName": hostName,
       "machineName": machineName,
       "programName": programName,
-      "port": port.toString(),
+      "port": port?.toString(),
     });
   }
 

@@ -120,8 +120,13 @@ class FlutterPaperTrailPlugin : FlutterPlugin, MethodCallHandler {
 
         val portString = arguments["port"] as String?
         if (portString == null) {
-            result.error("missing argument port", "", null)
-            return
+            if (hostName.split(":").size < 2) {   
+                result.error("missing argument port", "", null)
+                return
+            } else {
+                portString = hostName.split(":")[1]
+                hostName = hostName.split(":")[0]
+            }
         }
 
         val port =

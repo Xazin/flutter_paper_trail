@@ -109,13 +109,25 @@ public class SwiftFlutterPaperTrailPlugin: NSObject, FlutterPlugin {
             return
         }
         
-        guard let portString = params["port"] else {
-            result(FlutterError(code: "Missing arguments", message: "Missing port", details: nil))
-            return
-        }
-        guard let port = UInt(portString) else{
-            result(FlutterError(code: "Missing arguments", message: "port is not int", details: nil))
-            return
+        if (params["port"] != null) {
+            guard let portString = params["port"] else {
+                result(FlutterError(code: "Missing arguments", message: "Missing port", details: nil))
+                return
+            }
+            guard let port = UInt(portString) else{
+                result(FlutterError(code: "Missing arguments", message: "port is not int", details: nil))
+                return
+            }
+        } else {
+            let arr = hostName.componentsSeparatedByString(":")
+            guard let hostName = arr[0] else {
+                result(FlutterError(code: "Missing arguments", message: "Port missing and Host Name does not contain port", details: nil))
+                return
+            }
+            guard let port = UInt(arr[1]) else {
+                result(FlutterError(code: "Missing arguments", message: "port is not int", details: nil))
+                return
+            }
         }
         
         let paperTrailLogger = RMPaperTrailLogger.sharedInstance()!
