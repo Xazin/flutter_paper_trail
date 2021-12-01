@@ -8,14 +8,14 @@ class FlutterPaperTrail {
 
   static Future<String> initLogger({
     required String hostName,
-    int? port,
     required String programName,
     required String machineName,
+    int? port,
   }) async {
     return await _channel.invokeMethod('initLogger', {
       "hostName": hostName,
-      "machineName": machineName,
       "programName": programName,
+      "machineName": machineName,
       "port": port?.toString(),
     });
   }

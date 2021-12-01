@@ -106,7 +106,7 @@ class FlutterPaperTrailPlugin : FlutterPlugin, MethodCallHandler {
             return
         }
 
-        val hostName = arguments["hostName"] as String?
+        var hostName = arguments["hostName"] as String?
         if (hostName == null) {
             result.error("missing arguments", "", null)
             return
@@ -118,7 +118,7 @@ class FlutterPaperTrailPlugin : FlutterPlugin, MethodCallHandler {
             return
         }
 
-        val portString = arguments["port"] as String?
+        var portString = arguments["port"] as String?
         if (portString == null) {
             if (hostName.split(":").size < 2) {   
                 result.error("missing argument port", "", null)
